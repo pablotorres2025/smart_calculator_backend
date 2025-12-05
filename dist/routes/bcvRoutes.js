@@ -2,12 +2,12 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.bcvRouter = void 0;
 const express_1 = require("express");
-const bcvService_1 = require("../services/bcvService");
+const apisResponseService_1 = require("../services/apisResponseService");
 exports.bcvRouter = (0, express_1.Router)();
 // GET /api/bcv/rates
 exports.bcvRouter.get('/rates', async (_req, res) => {
     try {
-        const data = await (0, bcvService_1.getBcvRates)();
+        const data = await (0, apisResponseService_1.getBcvRatesFromDb)();
         res.json(data);
     }
     catch (error) {
