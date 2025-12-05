@@ -6,6 +6,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const bcvRoutes_1 = require("./routes/bcvRoutes");
 const binanceRoutes_1 = require("./routes/binanceRoutes");
+const mongo_1 = require("./config/mongo");
+const apisResponseScheduler_1 = require("./services/apisResponseScheduler");
 const app = (0, express_1.default)();
 const PORT = process.env.PORT || 3000;
 app.use(express_1.default.json());
@@ -19,7 +21,21 @@ app.get('/', (req, res) => {
         message: 'Smart Calculator Backend funcionando',
     });
 });
-app.listen(PORT, () => {
-    // eslint-disable-next-line no-console
-    console.log(`Servidor escuchando en el puerto ${PORT}`);
-});
+async function bootstrap() {
+    try {
+        await (0, mongo_1.connectMongo)();
+        // eslint-disable-next-line no-console
+        console.log('Conectado a MongoDB');
+        (0, apisResponseScheduler_1.startApisResponseScheduler)();
+        app.listen(PORT, () => {
+            // eslint-disable-next-line no-console
+            console.log(`Servidor escuchando en el puerto ${PORT}`);
+        });
+    }
+    catch (error) {
+        // eslint-disable-next-line no-console
+        console.error('Error inicializando la aplicación:', error);
+        process.exit(1);
+    }
+}
+bootstrap();

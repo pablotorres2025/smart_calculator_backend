@@ -1,5 +1,5 @@
 import { Router, Request, Response } from 'express';
-import { getBinanceUsdtP2PPrice } from '../services/binanceP2PService';
+import { getBinanceUsdtP2PPriceFromDb } from '../services/apisResponseService';
 
 export const binanceRouter = Router();
 
@@ -7,9 +7,9 @@ export const binanceRouter = Router();
 // Se pueden recibir query params en el futuro, por ejemplo: ?fiat=VES&asset=USDT
 binanceRouter.get('/usdt-p2p', async (req: Request, res: Response) => {
   try {
-    const asset = (req.query.asset as string) || 'USDT';
-    const fiat = (req.query.fiat as string) || 'VES';
-    const data = await getBinanceUsdtP2PPrice({ asset, fiat });
+    // Por ahora siempre se devuelve el último valor almacenado en BD
+    // ignorando los query params asset/fiat.
+    const data = await getBinanceUsdtP2PPriceFromDb();
     res.json(data);
   } catch (error: any) {
     // eslint-disable-next-line no-console

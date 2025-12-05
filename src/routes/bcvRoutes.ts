@@ -1,12 +1,12 @@
 import { Router, Request, Response } from 'express';
-import { getBcvRates } from '../services/bcvService';
+import { getBcvRatesFromDb } from '../services/apisResponseService';
 
 export const bcvRouter = Router();
 
 // GET /api/bcv/rates
 bcvRouter.get('/rates', async (_req: Request, res: Response) => {
   try {
-    const data = await getBcvRates();
+    const data = await getBcvRatesFromDb();
     res.json(data);
   } catch (error: any) {
     // eslint-disable-next-line no-console
