@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-const DEFAULT_URI = 'mongodb+srv://smart_calculator:uUWiukcuqeEEI9cQ@smartcalculator.ponywmb.mongodb.net/?appName=smartCalculator';
+const DEFAULT_URI = 'mongodb+srv://smart_calculator:uUWiukcuqeEEI9cQ@smartcalculator.ponywmb.mongodb.net/smart_calculator?appName=smartCalculator';
 
 const MONGODB_URI = process.env.MONGODB_URI || DEFAULT_URI;
 
