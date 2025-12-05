@@ -5,7 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.connectMongo = connectMongo;
 const mongoose_1 = __importDefault(require("mongoose"));
-const DEFAULT_URI = 'mongodb+srv://smart_calculator:uUWiukcuqeEEI9cQ@smartcalculator.ponywmb.mongodb.net/?appName=smartCalculator';
+const DEFAULT_URI = 'mongodb+srv://smart_calculator:uUWiukcuqeEEI9cQ@smartcalculator.ponywmb.mongodb.net/smart_calculator?appName=smartCalculator';
 const MONGODB_URI = process.env.MONGODB_URI || DEFAULT_URI;
 async function connectMongo() {
     if (!MONGODB_URI) {
